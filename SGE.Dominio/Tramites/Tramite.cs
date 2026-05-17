@@ -1,6 +1,6 @@
 using SGE.Dominio.Comun;
 
-class Tramite
+public class Tramite
 {
     public Guid Id { get; private set;}
     
