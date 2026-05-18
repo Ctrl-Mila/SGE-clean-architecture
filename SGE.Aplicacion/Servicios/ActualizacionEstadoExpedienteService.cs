@@ -1,4 +1,7 @@
+using SGE.Aplicacion.Comun;
 using SGE.Aplicacion.Expedientes;
+using SGE.Aplicacion.Tramites;
+using SGE.Dominio.Tramites;
 
 namespace SGE.Aplicacion.Servicios;
 

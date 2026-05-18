@@ -1,4 +1,5 @@
 using SGE.Aplicacion.Expedientes.ExpedienteDTOs;
+using SGE.Dominio.Expedientes;
 
 namespace SGE.Aplicacion.Expedientes.CasosDeUsoExpediente;
 

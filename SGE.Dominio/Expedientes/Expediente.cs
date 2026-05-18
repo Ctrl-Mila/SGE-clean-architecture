@@ -1,7 +1,6 @@
 using SGE.Dominio.Comun;
-using SGE.Dominio.Expedientes;
 using SGE.Dominio.Tramites;
-
+namespace SGE.Dominio.Expedientes;
 public class Expediente
 {
     public Guid Id { get; private set; }

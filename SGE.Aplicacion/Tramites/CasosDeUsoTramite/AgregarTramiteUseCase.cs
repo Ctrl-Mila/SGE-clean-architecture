@@ -1,3 +1,4 @@
+using SGE.Aplicacion.Autorizacion;
 using SGE.Aplicacion.Servicios;
 using SGE.Aplicacion.Tramites.TramiteDTOs;
 using SGE.Dominio.Tramites;

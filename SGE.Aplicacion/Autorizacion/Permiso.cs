@@ -1,3 +1,4 @@
+namespace SGE.Aplicacion.Autorizacion;
 public enum Permiso
 {
     ExpedienteAlta, 

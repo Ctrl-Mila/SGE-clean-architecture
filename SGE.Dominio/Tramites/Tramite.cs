@@ -1,5 +1,5 @@
 using SGE.Dominio.Comun;
-using SGE.Dominio.Tramites;
+namespace SGE.Dominio.Tramites;
 
 public class Tramite
 {
