@@ -1,4 +1,5 @@
 using SGE.Aplicacion.Tramites.TramiteDTOs;
+using SGE.Dominio.Tramites;
 
 namespace SGE.Aplicacion.Tramites.CasosDeUsoTramite;
 
