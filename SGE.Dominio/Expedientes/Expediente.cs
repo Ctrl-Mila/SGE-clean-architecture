@@ -9,6 +9,7 @@ public class Expediente
     public DateTime FechaUltimaModificacion { get; private set; }
     public Guid UsuarioUltimoCambio { get; private set; }
     public EstadoExpediente Estado { get; private set; } 
+    
     private Expediente (Guid id, Caratula c, DateTime fc, DateTime fu, Guid usuarioMod, EstadoExpediente e)
     {
         if (id == Guid.Empty)
@@ -38,10 +39,7 @@ public class Expediente
     public Expediente (Caratula c, Guid usuarioMod) 
             : this(Guid.NewGuid(), c, DateTime.Now, DateTime.Now, usuarioMod, EstadoExpediente.RecienIniciado) {}
 
-    public static Expediente Reconstruir (Guid id, Caratula c, DateTime fc, DateTime fu, Guid usuarioMod, EstadoExpediente e)
-    {
-        return new Expediente(id, c, fc, fu, usuarioMod, e);
-    } 
+    protected Expediente () {}
 
     public void ModificarCaratula (Caratula nuevaCaratula, Guid idUsuario)
     {
@@ -54,7 +52,7 @@ public class Expediente
         FechaUltimaModificacion = DateTime.Now;
     }
 
-    public bool ActualizarEstado(EtiquetaTramite? ultimaEtiqueta, Guid idUsuario)
+    public void ActualizarEstado(EtiquetaTramite? ultimaEtiqueta, Guid idUsuario)
     {
         if (idUsuario == Guid.Empty)
         {
@@ -80,15 +78,12 @@ public class Expediente
             nuevoEstado = EstadoExpediente.Finalizado;
         }
 
-        if (nuevoEstado == Estado)
+        if (nuevoEstado != Estado)
         {
-            return false;
+            Estado = nuevoEstado;
+            UsuarioUltimoCambio = idUsuario;
+            FechaUltimaModificacion = DateTime.Now;
         }
-
-        Estado = nuevoEstado;
-        UsuarioUltimoCambio = idUsuario;
-        FechaUltimaModificacion = DateTime.Now;
-        return true;
     }
 
     public void CambiarEstado(EstadoExpediente nuevoEstado, Guid idUsuario)

@@ -15,5 +15,7 @@ public record class ContenidoTramite
         Contenido = c.Trim();
     }
 
+    protected ContenidoTramite () {}
+
     public override string ToString() => Contenido;
 }

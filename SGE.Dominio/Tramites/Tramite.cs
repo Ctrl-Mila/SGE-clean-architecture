@@ -45,10 +45,7 @@ public class Tramite
     public Tramite (ContenidoTramite c, Guid expid, Guid usuario, EtiquetaTramite etiqueta) 
             : this(Guid.NewGuid(), c, expid, etiqueta, DateTime.Now, DateTime.Now, usuario) {}
 
-    public static Tramite Reconstruir (Guid id, ContenidoTramite contenido, Guid expid, EtiquetaTramite etiqueta, DateTime fc, DateTime fu, Guid usuario)
-    {
-        return new Tramite (id, contenido, expid, etiqueta, fc, fu, usuario);
-    }
+    protected Tramite () {}
 
     public void Modificar (Guid idUsuario, EtiquetaTramite nuevaEtiqueta, ContenidoTramite nuevoContenido)
     {

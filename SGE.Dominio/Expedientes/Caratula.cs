@@ -15,5 +15,7 @@ public record class Caratula
         NombreCaratula = c.Trim();
     }
 
+    protected Caratula () {}
+
     public override string ToString() => NombreCaratula;
 }    

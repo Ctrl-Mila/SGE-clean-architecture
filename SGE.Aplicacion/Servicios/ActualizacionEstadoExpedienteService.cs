@@ -11,11 +11,11 @@ public class ActualizacionEstadoExpedienteService (ITramiteRepository repoTramit
     {
         var expediente = repoExpediente.ObtenerPorId(idExpediente) ?? throw new EntidadNoEncontradaException ("El expediente no fue encontrado");
         
-        IEnumerable<Tramite> tramites = repoTramite.ObtenerPorExpedienteId(idExpediente);
+        var tramites = repoTramite.ObtenerPorExpedienteId(idExpediente);
 
         Tramite? ultimo = null;
         
-        foreach (Tramite t in tramites)
+        foreach (var t in tramites)
         {
             if (ultimo == null || t.FechaCreacion > ultimo.FechaCreacion)
             {
@@ -23,12 +23,7 @@ public class ActualizacionEstadoExpedienteService (ITramiteRepository repoTramit
             }
         }
 
-        bool cambio = expediente.ActualizarEstado(ultimo?.Etiqueta, idUsuario);
-
-        if (cambio)
-        {
-            repoExpediente.Modificar(expediente);
-        }
+        expediente.ActualizarEstado(ultimo?.Etiqueta, idUsuario);
 
     }
 

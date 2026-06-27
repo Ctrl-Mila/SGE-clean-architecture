@@ -1,11 +1,14 @@
 using SGE.Aplicacion.Autorizacion;
+using SGE.Aplicacion.Comun;
+using SGE.Aplicacion.Expedientes;
 using SGE.Aplicacion.Servicios;
 using SGE.Aplicacion.Tramites.TramiteDTOs;
 using SGE.Dominio.Tramites;
+using SGE.Dominio.Usuarios;
 
 namespace SGE.Aplicacion.Tramites.CasosDeUsoTramite;
 
-public class AgregarTramiteUseCase (ITramiteRepository repositorio, IAutorizacionService autorizacion, ActualizacionEstadoExpedienteService servicio)
+public class AgregarTramiteUseCase (ITramiteRepository repoTramite, IExpedienteRepository repoExpediente, IAutorizacionService autorizacion, ActualizacionEstadoExpedienteService servicio, IUnidadDeTrabajo unidadDeTrabajo)
 {
     public AgregarTramiteResponse Ejecutar (AgregarTramiteRequest request)
     {
@@ -13,12 +16,15 @@ public class AgregarTramiteUseCase (ITramiteRepository repositorio, IAutorizacio
         {
             throw new AutorizacionException ("El usuario no posee autorización para dar de alta un trámite");
         }
+        var expediente = repoExpediente.ObtenerPorId(request.IdExpediente) ?? throw new EntidadNoEncontradaException ("El expediente indicado no fue encontrado");
         
         var contenido = new ContenidoTramite(request.Contenido);
-        var tramite = new Tramite(contenido, request.IdExpediente, request.IdUsuario, request.Etiqueta);
+        var tramite = new Tramite(contenido, expediente.Id, request.IdUsuario, request.Etiqueta);
 
-        repositorio.Agregar(tramite);
-        servicio.RevisionDeActualizacion(request.IdExpediente, request.IdUsuario);
+        repoTramite.Agregar(tramite);
+        
+        servicio.RevisionDeActualizacion(expediente.Id, request.IdUsuario);
+        unidadDeTrabajo.GuardarCambios();
 
         return new AgregarTramiteResponse(tramite.Id);
     }

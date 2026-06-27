@@ -7,7 +7,7 @@ public class ListarTodosLosExpedientesUseCase (IExpedienteRepository repositorio
 {
     public ListarExpedientesResponse Ejecutar(ListarExpedientesRequest request)
     {
-        IEnumerable<Expediente> expedientes = repositorio.ObtenerTodos();
+        var expedientes = repositorio.ObtenerTodos();
 
         var lista = new List<ExpedienteResponse>();
 
